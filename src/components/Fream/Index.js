@@ -4,7 +4,8 @@ import { Layout, Menu, Breadcrumb } from 'antd';
 
 import logo from './logo.gif'
 import { adminRoutes } from '../../routes/index'
-
+// 在组建中实现路由跳转需要 使用widthRouter插件
+import { withRouter } from 'react-router-dom'
 const routes = adminRoutes.filter(route => route.isShow)
 
 const { Header, Content, Sider } = Layout;
@@ -12,13 +13,21 @@ const { Header, Content, Sider } = Layout;
 const Icon = createFromIconfontCN({
     scriptUrl: '//at.alicdn.com/t/font_2645414_c8kovpj82z.js',
 });
+/* 
+ * 行内样式:
+ *     
+ *     1. const title = {widht: '20px', height: '20px'}
+ *        <h1 style={{title}}></h1>
+ *     2. <h1 style={{color:'red',fontSize:'30px'}}></h1>    
+ */
+
 
 function Index(props) {
     return (
         <Layout>
             <Header className="header">
                 <div className="logo">
-                    <img src={logo} alt={logo} style={{ width:'250px', height:'50px' }}/>
+                    <img src={logo} alt={logo} style={{ width: '250px', height: '50px' }} />
                 </div>
             </Header>
             <Layout>
@@ -30,18 +39,21 @@ function Index(props) {
                         style={{ height: '100%', borderRight: 0 }}
                     >
                         {routes.map(route => {
-                            return (<Menu.Item key={route.path}>
-                                <Icon type={route.icon} />
+                            return (<Menu.Item
+                                key={route.path}
+                                onClick={p => props.history.push(p.key)}
+                            >
+                                <Icon type={route.icon} style={{'width': '20px'}} />
                                 {route.title}
                             </Menu.Item>)
                         })}
                     </Menu>
                 </Sider>
-                <Layout style={{ padding: '0 24px 24px' }}>
-                    <Breadcrumb style={{ margin: '16px 0' }}>
-                        <Breadcrumb.Item>Home</Breadcrumb.Item>
-                        <Breadcrumb.Item>List</Breadcrumb.Item>
-                        <Breadcrumb.Item>App</Breadcrumb.Item>
+                <Layout style={{ padding: '0 15px 15px' }}>
+                    <Breadcrumb style={{ margin: '10px 0' }}>
+                        <Breadcrumb.Item></Breadcrumb.Item>
+                        <Breadcrumb.Item></Breadcrumb.Item>
+                        <Breadcrumb.Item></Breadcrumb.Item>
                     </Breadcrumb>
                     <Content
                         className="site-layout-background"
@@ -59,4 +71,4 @@ function Index(props) {
     )
 }
 
-export default Index
+export default withRouter(Index);
