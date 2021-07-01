@@ -4,6 +4,7 @@ import List from "../pages/home/List";
 import Redact from "../pages/home/Redact";
 import PageNotFound from "../pages/PageNotFound";
 
+
 export const mainRoutes = [
     {
         path: '/login',
@@ -18,15 +19,22 @@ export const mainRoutes = [
 export const adminRoutes = [
     {
         path: '/home/index',
-        component: Index
+        component: Index,
+        isShow: true,
+        title: "面板",
+        icon: 'icon-Halloween-1'
     },
     {
         path: '/home/list',
         component: List,
-        exact: true
+        isShow: true,
+        exact: true,
+        title: "商品",
+        icon: 'icon-pingguo'
     },
     {
         path: '/home/list/redact/:id',
-        component: Redact
+        component: Redact,
+        isShow: false
     }
 ]
