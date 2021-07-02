@@ -43,7 +43,7 @@ function Index(props) {
                                 key={route.path}
                                 onClick={p => props.history.push(p.key)}
                             >
-                                <Icon type={route.icon} style={{'width': '20px'}} />
+                                <Icon type={route.icon} twoToneColor="#52c41a" style={{ 'margin-right': '20px' }} />
                                 {route.title}
                             </Menu.Item>)
                         })}
